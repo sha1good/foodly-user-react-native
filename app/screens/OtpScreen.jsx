@@ -11,17 +11,17 @@ import React, { useRef, useState } from "react";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import { firebaseConfig } from "../../config";
 import firebase from "firebase/compat/app";
-import OTPInputView from "@twotalltotems/react-native-otp-input";
+import { OtpInput } from "react-native-otp-entry";
 import { CountryPicker } from "react-native-country-codes-picker";
 import { COLORS } from "../constants/theme";
-import { BackBtn } from "../components";
+
 
 const bkImg =
   "https://d326fntlu7tb1e.cloudfront.net/uploads/8cd2cb78-c99c-4408-a333-91ec6c1bb9e3-restaurant_bk.png";
 
 export default function OtpScreen() {
   const [show, setShow] = useState(false);
-  const [countryCode, setCountryCode] = useState("+263");
+  const [countryCode, setCountryCode] = useState("+1");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [code, setCode] = useState("");
   const [verificationId, setVerificationId] = useState(null);
@@ -89,8 +89,9 @@ export default function OtpScreen() {
 
         <View style={{alignItems: "center"}}>
         <CountryPicker
+        initialState="US"
         show={show}
-        // when picker button press you will get the country object with dial code
+       
         pickerButtonOnPress={(item) => {
           setCountryCode(item.dial_code);
           setShow(false);
@@ -109,7 +110,7 @@ export default function OtpScreen() {
           <TouchableOpacity
             onPress={() => setShow(true)}
             style={{
-              paddingHorizontal: 20,
+              paddingHorizontal: 25,
               height: 41.3,
               borderTopLeftRadius: 9,
               borderBottomLeftRadius: 9,
@@ -148,22 +149,28 @@ export default function OtpScreen() {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={{marginBottom: 50}}/>
 
-      <OTPInputView
-        style={{ width: "90%", height: 50, margin: 40 }}
-        pinCount={6}
-        onCodeChanged={setCode}
-        autoFocusOnLoad
-        placeholderCharacter={"0"}
-        editable={true}
-        keyboardType={"number-pad"}
-        codeInputFieldStyle={styles.underlineStyleBase}
-        codeInputHighlightStyle={styles.underlineStyleHighLighted}
-        onCodeFilled={(code) => {
-          confirmCode;
-          console.log(`Code is ${code}, you are good to go!`);
-        }}
-      />
+      <OtpInput
+          numberOfDigits={6}
+          focusColor={COLORS.primary}
+          focusStickBlinkingDuration={500}
+          onTextChange={(code) => {
+            // setCode(code);
+          }}
+          onFilled={(code) => setCode(code)}
+          theme={{
+            containerStyle: { margin: 12 },
+            inputsContainerStyle: styles.inputsContainer,
+            pinCodeContainerStyle: styles.pinCodeContainer,
+            pinCodeTextStyle: styles.pinCodeText,
+            focusStickStyle: styles.focusStick,
+            focusedPinCodeContainerStyle: styles.activePinCodeContainer,
+          }}
+        />
+
+      <View style={{marginBottom: 50}}/>
+
 
       <TouchableOpacity style={styles.sendCode} onPress={confirmCode}>
         <Text style={styles.buttonText}>Confirm Code</Text>

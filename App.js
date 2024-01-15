@@ -141,7 +141,7 @@ export default function App() {
                   <Stack.Screen
                     name='otp-screen'
                     component={OtpScreen}
-                    options={{ headerShown: false }}
+                    options={{ headerShown: true, title: 'OTP Verification', }}
                   />
 
                   <Stack.Screen

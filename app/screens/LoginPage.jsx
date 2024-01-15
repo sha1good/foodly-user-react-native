@@ -65,6 +65,7 @@ const LoginPage = ({ navigation }) => {
         await AsyncStorage.setItem("id", JSON.stringify(response.data._id));
         await AsyncStorage.setItem("token", JSON.stringify(response.data.userToken));
         await AsyncStorage.setItem("verification", JSON.stringify(response.data.verified));
+        await AsyncStorage.setItem("email", JSON.stringify(response.data.email));
 
         await AsyncStorage.setItem("user", JSON.stringify(response.data));
 

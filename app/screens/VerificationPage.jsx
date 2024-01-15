@@ -6,7 +6,7 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OtpInput } from "react-native-otp-entry";
 import { COLORS } from "../constants/theme";
 import { BackBtn } from "../components";
@@ -21,12 +21,11 @@ const VerificationPage = ({ navigation }) => {
   const [show, setShow] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [code, setCode] = useState("");
-  const [data, setData] = useState(null);
+  const [data, setData] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const verifyAccount = async () => {
-    
     const token = await AsyncStorage.getItem("token");
     const accessToken = JSON.parse(token);
 
@@ -35,16 +34,20 @@ const VerificationPage = ({ navigation }) => {
     try {
       console.log(accessToken);
 
-      const response = await axios.get(`http://localhost:6002/api/users/verify/${code}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      
+      const response = await axios.get(
+        `http://localhost:6002/api/users/verify/${code}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       if (response.status === 200) {
-        await AsyncStorage.setItem("verification", JSON.stringify(response.data.verified));
+        await AsyncStorage.setItem(
+          "verification",
+          JSON.stringify(response.data.verified)
+        );
         navigation.navigate("bottom-navigation");
         setLoading(false);
       } else {
@@ -54,10 +57,18 @@ const VerificationPage = ({ navigation }) => {
     } catch (error) {
       setLoading(false);
       setError(error);
-     
     }
   };
-  
+
+  useEffect(() => {
+    getEmail();
+  }, []);
+
+  const getEmail = async () => {
+    const data = await AsyncStorage.getItem("email");
+    setData(JSON.parse(data));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <BackBtn top={60} onPress={() => navigation.goBack()} />
@@ -83,27 +94,12 @@ const VerificationPage = ({ navigation }) => {
           margin: 12,
         }}
       >
-        The email has been sent to akotoxmpimbo@outlook.com. If the email is
-        correct, please delete this account and create a new one with the
-        correct email. Alternatively, you can logout and browser the app without
-        an account.
+        The email has been sent to {data}. If the email is correct, please
+        delete this account and create a new one with the correct email.
+        Alternatively, you can logout and browser the app without an account.
       </Text>
 
       <View style={{ alignItems: "center" }}>
-        {/* <OTPInputView
-          style={{ width: "90%", height: 50, margin: 40 }}
-          pinCount={6}
-          onCodeChanged={setCode}
-          autoFocusOnLoad
-          placeholderCharacter={"0"}
-          editable={true}
-          keyboardType={"number-pad"}
-          codeInputFieldStyle={styles.underlineStyleBase}
-          codeInputHighlightStyle={styles.underlineStyleHighLighted}
-          onCodeFilled={(code) => {
-            console.log(`Code is ${code}, you are good to go!`);
-          }}
-        /> */}
         <OtpInput
           numberOfDigits={6}
           focusColor={COLORS.primary}

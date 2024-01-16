@@ -3,12 +3,11 @@ import React from "react";
 import { COLORS } from "../../constants/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+
 const bkImg =
   "https://d326fntlu7tb1e.cloudfront.net/uploads/8cd2cb78-c99c-4408-a333-91ec6c1bb9e3-restaurant_bk.png";
 
-  const navigation = useNavigation();
-const DefaultAddress = ({ route }) => {
+const DefaultAddress = ({ route, navigation }) => {
   const item = route.params;
 
   const handleSubmit = async (id) => {
@@ -26,7 +25,7 @@ const DefaultAddress = ({ route }) => {
         }
       );
       if (response.status === 200) {
-        navigation.goBack();
+        navigation.navigate('bottom-navigation');
       } else {
         console.log(response);
       }

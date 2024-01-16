@@ -14,7 +14,7 @@ const DefaultAddress = ({ route }) => {
   const handleSubmit = async (id) => {
     const token = await AsyncStorage.getItem("token");
     const accessToken = JSON.parse(token);
-    const url =  `http://localhost:6002/api/address/default/65a6714d344ca06644c040f0`
+    const url =  `http://localhost:6002/api/address/default/${id}`
     try {
       const response = await axios.patch(
        url,

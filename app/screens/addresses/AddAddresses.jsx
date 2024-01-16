@@ -15,14 +15,19 @@ import * as Location from "expo-location";
 import PagerView from "react-native-pager-view";
 import { COLORS } from "../../constants/theme";
 import { Button } from "../../components";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const bkImg =
   "https://d326fntlu7tb1e.cloudfront.net/uploads/8cd2cb78-c99c-4408-a333-91ec6c1bb9e3-restaurant_bk.png";
 
-const AddAddresses = () => {
-  const [initialPage, setInitialPage] = useState(0);
-  const [deliveryInstructions, setDeliveryInstructions] = useState("");
+const AddAddresses = ({ navigation }) => {
   const pagerRef = useRef(null);
+  const mapRef = useRef(null);
+  const [initialPage, setInitialPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [deliveryInstructions, setDeliveryInstructions] = useState("");
+
   const [isDefaultAddress, setIsDefaultAddress] = useState(false);
   const [pin, setPin] = useState({
     latitude: 37.78825,
@@ -56,38 +61,42 @@ const AddAddresses = () => {
     pagerRef.current?.setPage(initialPage + 1);
   };
 
-  const goToPrevious = () => {
-    pagerRef.current?.setPage(0);
+  const handleSubmit = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const accessToken = JSON.parse(token);
+    
+    setLoading(true);
+    const data = {
+      addressLine1: address,
+      postalCode: postalCode,
+      deliveryInstructions: deliveryInstructions,
+      default: isDefaultAddress,
+      latitude: region.latitude,
+      longitude: region.longitude,
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:6002/api/address`,
+        data, 
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        navigation.goBack();
+      } else {
+        console.log(response.body);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+    setLoading(false); // This should be outside to ensure it's called whether or not the request is successful
   };
+  
 
-  const handleSubmit = () => {
-    // Handle the submit action
-    console.log({
-      postalCode,
-      address,
-      deliveryInstructions,
-      isDefaultAddress,
-    });
-  };
-
-  // const [query, setQuery] = useState('');
-  // const [places, setPlaces] = useState([]);
-
-  // const searchPlaces = async () => {
-  //   if (query.length === 0) {
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await fetch(
-  //       `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&key=AIzaSyAYgK10l_C_HG-pSeVBVUxChyGSm6wa78Q`
-  //     );
-  //     const json = await response.json();
-  //     setPlaces(json.predictions);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
   return (
     <PagerView style={styles.pagerView} initialPage={0} ref={pagerRef}>
       <View key="1" style={styles.page}>
@@ -99,17 +108,36 @@ const AddAddresses = () => {
               rankby: "distance",
             }}
             onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details);
+              if (details && details.address_components) {
+                const postalCodeComponent = details.address_components.find(
+                  (component) => component.types.includes("postal_code")
+                );
+                const postalCode = postalCodeComponent
+                  ? postalCodeComponent.long_name
+                  : "";
+                setCode(postalCode);
+              }
+
+              setAddress(data.description);
               setRegion({
                 latitude: details.geometry.location.lat,
                 longitude: details.geometry.location.lng,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               });
+              if (details) {
+                const newRegion = {
+                  latitude: details.geometry.location.lat,
+                  longitude: details.geometry.location.lng,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                };
+
+                mapRef.current.animateToRegion(newRegion, 1000);
+              }
             }}
             query={{
-              key: "AIzaSyA09oOMVS63J-gyKlk0TyHQDNWuzmbig0Q",
+              key: "AIzaSyAxBpSy7vvZYMubU_FiEIsw0P9UaSBHfdM",
               language: "en",
               location: `${region.latitude}, ${region.longitude}`,
             }}
@@ -132,6 +160,7 @@ const AddAddresses = () => {
           </TouchableOpacity>
 
           <MapView
+            ref={mapRef}
             style={styles.map}
             initialRegion={{
               latitude: 37.78825,
@@ -208,7 +237,7 @@ const AddAddresses = () => {
           <Text>Set this address as default</Text>
           <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isDefaultAddress ? "#f5dd4b" : "#f4f3f4"}
+            thumbColor={isDefaultAddress ? "#f5dd4b" : COLORS.primary}
             onValueChange={setIsDefaultAddress}
             value={isDefaultAddress}
           />
@@ -216,16 +245,15 @@ const AddAddresses = () => {
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Button
+          loader={loading}
             title={"S U B M I T"}
-            onPress={() => {}}
+            onPress={() => handleSubmit()}
             isValid={true}
             radius={16}
           />
         </View>
 
-        <TouchableOpacity style={styles.button1} onPress={goToPrevious}>
-          <Text style={styles.buttonText}>Pick Address</Text>
-        </TouchableOpacity>
+        
       </View>
     </PagerView>
   );
@@ -271,16 +299,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "medium",
   },
-  button1: {
-    backgroundColor: "#007AFF",
-    padding: 10,
-    borderRadius: 30,
-    flex: 0,
-    position: "absolute",
-    zIndex: 1,
-    bottom: 30,
-    left: 12,
-  },
+ 
   input: {
     height: 40,
     margin: 12,

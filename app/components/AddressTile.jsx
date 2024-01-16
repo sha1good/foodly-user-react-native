@@ -19,9 +19,9 @@ const AddressTile = ({ onPress, item }) => {
     <TouchableOpacity onPress={onPress}>
       <View style={styles.outter}>
         <View style={styles.inner}>
-          <FontAwesome name="building-o" size={22} color={COLORS.gray} />
+          <FontAwesome name="building-o" size={22} color={COLORS.gray} style={{marginTop: 6}}/>
           <View>
-            <Text style={styles.text}>{item.item.addressLine1}</Text>
+            <Text style={styles.text} numberOfLines={2}>{item.item.addressLine1}</Text>
             <Text style={styles.text}>{item.item.postalCode}</Text>
           </View>
         </View>
@@ -39,13 +39,14 @@ const styles = StyleSheet.create({
   outter: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // alignItems: "center",
+    alignItems: "baseline",
+   
   },
   inner: {
+    width: "70%",
     flexDirection: "row",
     marginHorizontal: 20,
-    alignItems: "center",
-    marginVertical: 6,
+    alignItems: "flex-start",
   },
   text: {
     marginLeft: 10,

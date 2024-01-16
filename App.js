@@ -24,6 +24,7 @@ import VerificationPage from './app/screens/VerificationPage';
 import OtpScreen from './app/screens/OtpScreen';
 import ShippingAddress from './app/screens/ShippingAddress';
 import AddAddressess from './app/screens/addresses/AddAddresses';
+import DefaultAddress from './app/screens/addresses/DefaultAddress';
 const Stack = createNativeStackNavigator();
 
 // const storage = new MMKV();
@@ -147,7 +148,13 @@ export default function App() {
                   <Stack.Screen
                     name='shipping-address'
                     component={ShippingAddress}
-                    options={{ headerShown: true, title: ''}}
+                    options={{ headerShown: true, title: '' }}
+                  />
+
+                  <Stack.Screen
+                    name='default_add'
+                    component={DefaultAddress}
+                    options={{ headerShown: true, title: 'Set Default Address' }}
                   />
 
                   <Stack.Screen

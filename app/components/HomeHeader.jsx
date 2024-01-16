@@ -5,11 +5,16 @@ import { COLORS, SIZES } from "../constants/theme";
 import { UserReversedGeoCode } from "../context/UserReversedGeoCode";
 import { UserLocationContext } from "../context/UserLocationContext";
 import * as Location from "expo-location";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const HomeHeader = () => {
   const [time, setTime] = useState(null);
   const { address, setAddress } = useContext(UserReversedGeoCode);
+  const [defaultad, setDefault] = useState(null);
   const { location, setLocation } = useContext(UserLocationContext);
+  const [logged, setLogged] = useState(false);
+
 
   useEffect(() => {
     if (location !== null) {
@@ -17,8 +22,42 @@ const HomeHeader = () => {
     }
     const greeting = getTimeOfDay();
     setTime(greeting);
+    loginStatus();
   }, [location]);
 
+  const loginStatus = async () => {
+    const userToken = await AsyncStorage.getItem('token')
+
+    if (userToken !== null) {
+      setLogged(true)
+      getDefault();
+    } else {
+      setLogged(false)
+    }
+  }
+
+  const getDefault = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const accessToken = JSON.parse(token);
+
+    try {
+      const response = await axios.get(
+        `http://localhost:6002/api/address/default`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        setDefault(response.data);
+      } else {
+        console.log(response.body);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
  
 
   const getTimeOfDay = () => {
@@ -55,9 +94,11 @@ const HomeHeader = () => {
 
         <View style={styles.headerText}>
           <Text style={styles.heading}>Delivering to</Text>
-          <Text
+          {defaultad === null ? (<Text
             style={styles.location}
-          >{`${address.city} ${address.name}`}</Text>
+          >{`${address.city} ${address.name}`}</Text>) : (<Text numberOfLines={2}
+            style={styles.location}
+          >{defaultad.addressLine1}</Text>)}
         </View>
       </View>
 
@@ -77,6 +118,7 @@ const styles = StyleSheet.create({
 
   headerText: {
     marginLeft: 15,
+    width: "70%",
     justifyContent: "center",
   },
 
@@ -95,7 +137,7 @@ const styles = StyleSheet.create({
 
   location: {
     fontFamily: "regular",
-    fontSize: SIZES.small + 2,
+    fontSize: SIZES.small,
     color: COLORS.gray,
   },
 });

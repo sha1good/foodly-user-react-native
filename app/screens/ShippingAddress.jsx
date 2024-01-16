@@ -43,6 +43,7 @@ const navigation = useNavigation();
             <Button
             isValid={true}
             title="Add Address"
+            radius={30}
             onPress={()=> navigation.navigate('add-address')}
             />
         </View>

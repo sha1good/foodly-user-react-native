@@ -14,7 +14,7 @@ const fetchCategories = () => {
             const response = await axios.get(`http://localhost:6002/api/category/random`);
 
             setCategories(response.data)
-s
+            
             
             setIsLoading(false)
         } catch (error) {

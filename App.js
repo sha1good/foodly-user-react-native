@@ -25,6 +25,9 @@ import OtpScreen from './app/screens/OtpScreen';
 import ShippingAddress from './app/screens/ShippingAddress';
 import AddAddressess from './app/screens/addresses/AddAddresses';
 import DefaultAddress from './app/screens/addresses/DefaultAddress';
+import MoreFoods from './app/screens/food/MoreFoods';
+import AllRestaurants from './app/screens/food/AllRestaurants';
+import FastestFoods from './app/screens/food/FastestFoods';
 const Stack = createNativeStackNavigator();
 
 // const storage = new MMKV();
@@ -168,6 +171,24 @@ export default function App() {
                     name='rating-page'
                     component={AddRating}
                     options={{ headerShown: false }}
+                  />
+
+                  <Stack.Screen
+                    name='more_categories'
+                    component={MoreFoods}
+                    options={{ headerShown: true, title: 'Explore Foods' }}
+                  />
+
+                  <Stack.Screen
+                    name='nearby_restaurants'
+                    component={AllRestaurants}
+                    options={{ headerShown: true, title: 'All Restaurants' }}
+                  />
+
+                  <Stack.Screen
+                    name='fastest'
+                    component={FastestFoods}
+                    options={{ headerShown: true, title: 'All Restaurants' }}
                   />
                 </Stack.Navigator>
               </NavigationContainer>

@@ -15,7 +15,7 @@ import HomeCategory from "../components/HomeCategory";
 import { COLORS, SIZES } from "../constants/theme";
 import fetchCartCount from "../hooks/cartCount";
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedChoice, setSelectedChoice] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
@@ -93,19 +93,19 @@ const Home = () => {
               </View>
             ) : (
               <View>
-                <Heading heading={"Nearby Restaurants"} onPress={() => {}} />
+                <Heading heading={"Nearby Restaurants"} onPress={() => {navigation.navigate('nearby_restaurants')}} />
 
                 <NearByRestaurants code={"41007428"} />
 
                 <Divider />
 
-                <Heading heading={"Try Something New"} onPress={() => {}} />
+                <Heading heading={"Try Something New"} onPress={() => {navigation.navigate('fastest')}} />
 
                 <NewFoodList code={"41007428"} />
 
                 <Divider />
 
-                <Heading heading={"Fastest Near You"} onPress={() => {}} />
+                <Heading heading={"Fastest Near You"} onPress={() => {navigation.navigate('fastest')}} />
                 <NewFoodList code={"41007428"} />
               </View>
             )}

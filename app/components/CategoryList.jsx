@@ -9,8 +9,12 @@ import React, { useState } from "react";
 import CategoryItem from "./CategoryItem";
 import fetchCategories from "../hooks/categoryHook";
 import ReusableShimmer from "./Shimmers/ReusableShimmer";
+import { useNavigation } from "@react-navigation/native";
+
 
 const CategoryList = ({ setSelectedCategory, setSelectedSection, setSelectedValue }) => {
+  const navigation = useNavigation();
+  
   const [selected, setSelected] = useState(null);
   const restaurantShimmer = [1, 2, 3, 4, 5, 6, 7];
   const {categories, isLoading, error, refetch} = fetchCategories()
@@ -21,7 +25,10 @@ const CategoryList = ({ setSelectedCategory, setSelectedSection, setSelectedValu
       setSelected(null);
       setSelectedValue(null)
       setSelectedSection(null)
+    }else if(item.title === 'More'){
+        navigation.navigate('more_categories')
     } else {
+      
       setSelectedCategory(item._id);
       setSelectedValue(item.title)
 

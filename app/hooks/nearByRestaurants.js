@@ -13,6 +13,7 @@ const fetchNearByRestaurants = (code) => {
             const response = await axios.get(`http://localhost:6002/api/restaurant/${code}`);
 
             setRestaurants(response.data)
+            console.log(restaurants);
             setIsLoading(false)
         } catch (error) {
            setError(error) 

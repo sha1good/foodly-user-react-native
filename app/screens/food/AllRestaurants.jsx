@@ -10,26 +10,27 @@ import React from "react";
 import fetchFoodRecommendations from "../../hooks/recommendationsByCat";
 import HorizontalShimmer from "../../components/Shimmers/HorizontalShimmer";
 import { COLORS } from "../../constants/theme";
+import fetchNearByRestaurants from "../../hooks/nearByRestaurants";
 
 const bkImg =
   "https://d326fntlu7tb1e.cloudfront.net/uploads/8cd2cb78-c99c-4408-a333-91ec6c1bb9e3-restaurant_bk.png";
 
 const AllRestaurants = () => {
-  const { recommendations, isLoading, error, refetch } =
-    fetchFoodRecommendations("41007428");
+
+    const {restaurants, isLoading, error, refetch} = fetchNearByRestaurants('41007428')
 
   if (isLoading) {
     return <HorizontalShimmer />;
   }
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Image source={{ uri: item.imageUrl[0] }} style={styles.image} />
+      <Image source={{ uri: item.imageUrl }} style={styles.image} />
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.subTitle} numberOfLines={2}>
-          {item.description}
+          {item.coords.address}
         </Text>
-        <Text style={styles.price}>${item.price}</Text>
+        <Text style={styles.price}>{item.time}</Text>
       </View>
       <TouchableOpacity
         style={[
@@ -54,7 +55,7 @@ const AllRestaurants = () => {
         blurRadius={0}
       />
       <FlatList
-        data={recommendations}
+        data={restaurants}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
       />
@@ -90,16 +91,16 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   price: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
     color: "gray",
-    position: "absolute",
-    bottom: 0,
-    right: 10,
+   position: "absolute",
+   right: 6,
+   top: -2
   },
   statusContainer: {
     position: "absolute",
-    top: 15,
+    bottom: 15,
     right: 10,
     paddingHorizontal: 10,
     borderRadius: 15,

@@ -99,7 +99,7 @@ const Home = ({navigation}) => {
 
                 <Divider />
 
-                <Heading heading={"Try Something New"} onPress={() => {navigation.navigate('fastest')}} />
+                <Heading heading={"Try Something New"} onPress={() => {navigation.navigate('nearby_restaurants')}} />
 
                 <NewFoodList code={"41007428"} />
 

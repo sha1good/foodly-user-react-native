@@ -87,7 +87,7 @@ const Orders = () => {
       console.log("Session URL:", data.url);
       setPaymentUrl(data.url);
 
-      const result = await WebBrowser.openBrowserAsync(data.url);
+       await WebBrowser.openBrowserAsync(data.url);
 
     } catch (error) {
       if (error.response) {

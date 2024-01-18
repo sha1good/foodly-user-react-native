@@ -41,7 +41,7 @@ const Search = ({navigation}) => {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={()=> {navigation.navigate('food-nav')}}>
+    <TouchableOpacity style={styles.itemContainer} onPress={()=> {navigation.navigate('food-nav', item)}}>
       <View style={styles.outter}>
         <Image source={{ uri: item.imageUrl[0] }} style={styles.image} />
         <View style={styles.titlesContainer}>

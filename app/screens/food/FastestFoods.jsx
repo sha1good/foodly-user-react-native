@@ -14,7 +14,7 @@ import { COLORS } from "../../constants/theme";
 const bkImg =
   "https://d326fntlu7tb1e.cloudfront.net/uploads/8cd2cb78-c99c-4408-a333-91ec6c1bb9e3-restaurant_bk.png";
 
-const FastestFoods = () => {
+const FastestFoods = ({navigation}) => {
   const { recommendations, isLoading, error, refetch } =
     fetchFoodRecommendations("41007428");
 
@@ -22,7 +22,7 @@ const FastestFoods = () => {
     return <HorizontalShimmer />;
   }
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={()=> {navigation.navigate("food-nav", item)}}>
       <Image source={{ uri: item.imageUrl[0] }} style={styles.image} />
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{item.title}</Text>
@@ -31,7 +31,7 @@ const FastestFoods = () => {
         </Text>
         <Text style={styles.price}>${item.price}</Text>
       </View>
-      <TouchableOpacity
+      <View
         style={[
           styles.statusContainer,
           item.isAvailable ? styles.open : styles.closed,
@@ -40,8 +40,8 @@ const FastestFoods = () => {
         <Text style={styles.statusText}>
           {item.isAvailable ? item.time : item.time}
         </Text>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 
   return (

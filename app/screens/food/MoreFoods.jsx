@@ -1,4 +1,4 @@
-import { View, FlatList, Text, Image, StyleSheet } from "react-native";
+import { View, FlatList, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import fetchCategories from "../../hooks/categoryHook";
 import HorizontalShimmer from "../../components/Shimmers/HorizontalShimmer";
@@ -9,21 +9,21 @@ import { AntDesign } from "@expo/vector-icons";
 const bkImg =
   "https://d326fntlu7tb1e.cloudfront.net/uploads/8cd2cb78-c99c-4408-a333-91ec6c1bb9e3-restaurant_bk.png";
 
-const MoreFoods = () => {
+const MoreFoods = ({navigation}) => {
   const { categories, isLoading, error, refetch } = fetchCategories();
 
   if (isLoading === true) {
     return <HorizontalShimmer />;
   }
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={()=> {}}>
       <View style={{ flexDirection: "row", alignContent: "space-between" }}>
         <Image source={{ uri: item.imageUrl }} style={styles.image} />
         <Text style={styles.text}>{item.title}</Text>
       </View>
 
       <AntDesign name="right" size={24} color={COLORS.gray} />
-    </View>
+    </TouchableOpacity>
   );
 
   return (

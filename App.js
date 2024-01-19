@@ -188,7 +188,7 @@ export default function App() {
                   <Stack.Screen
                     name='fastest'
                     component={FastestFoods}
-                    options={{ headerShown: true, title: 'All Restaurants' }}
+                    options={{ headerShown: true, title: 'All Fastest Foods' }}
                   />
                 </Stack.Navigator>
               </NavigationContainer>

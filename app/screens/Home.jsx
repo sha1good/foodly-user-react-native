@@ -30,7 +30,7 @@ const Home = ({navigation}) => {
 
     try {
       const response = await axios.get(
-        `http://localhost:6002/api/foods/${selectedCategory}/41007428`
+        `https://foodlybackend-react-production.up.railway.app/api/foods/${selectedCategory}/41007428`
       );
 
       setCategory(response.data);

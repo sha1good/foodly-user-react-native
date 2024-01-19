@@ -15,7 +15,7 @@ const fetchCartCount = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/cart/count`, 
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/cart/count`, 
             {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,

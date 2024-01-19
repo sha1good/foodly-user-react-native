@@ -27,7 +27,7 @@ const Search = ({navigation}) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:6002/api/foods/search/${searchKey}`
+        `https://foodlybackend-react-production.up.railway.app/api/foods/search/${searchKey}`
       );
       setSearchResults(response.data);
     } catch (error) {

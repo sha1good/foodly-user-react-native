@@ -57,7 +57,7 @@ const SignUp = ({ navigation }) => {
     setLoader(true);
 
     try {
-      const endpoint = "http://localhost:6002/register";
+      const endpoint = "https://foodlybackend-react-production.up.railway.app/register";
       const data = values;
 
       const response = await axios.post(endpoint, data);

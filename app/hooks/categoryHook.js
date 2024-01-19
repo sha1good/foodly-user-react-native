@@ -11,7 +11,7 @@ const fetchCategories = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/category/random`);
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/category/random`);
 
             setCategories(response.data)
             

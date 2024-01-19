@@ -54,7 +54,7 @@ const LoginPage = ({ navigation }) => {
     setLoader(true);
 
     try {
-      const endpoint = "http://localhost:6002/login";
+      const endpoint = "https://foodlybackend-react-production.up.railway.app/login";
       const data = values;
 
       const response = await axios.post(endpoint, data);

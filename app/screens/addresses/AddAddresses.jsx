@@ -77,7 +77,7 @@ const AddAddresses = ({ navigation }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:6002/api/address`,
+        `https://foodlybackend-react-production.up.railway.app/api/address`,
         data, 
         {
           headers: {

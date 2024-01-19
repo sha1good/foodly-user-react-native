@@ -10,7 +10,7 @@ const fetchFoodRecommendations = (code) => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/foods/recommendation/${code}`);
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/foods/recommendation/${code}`);
 
             setRecommendations(response.data)
 s

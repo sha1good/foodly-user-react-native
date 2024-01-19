@@ -14,7 +14,7 @@ const fetchProfile = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/users`,
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/users`,
             {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,

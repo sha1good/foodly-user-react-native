@@ -14,7 +14,7 @@ const fetchAddresses = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/address/all`,
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/address/all`,
             {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,

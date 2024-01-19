@@ -8,7 +8,7 @@ const fetchCategortItems = (category, code) => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/restaurant/byId/${id}`);
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/restaurant/byId/${id}`);
 
             setCategoryItems(response.data)
 

@@ -35,7 +35,7 @@ const VerificationPage = ({ navigation }) => {
       console.log(accessToken);
 
       const response = await axios.get(
-        `http://localhost:6002/api/users/verify/${code}`,
+        `https://foodlybackend-react-production.up.railway.app/api/users/verify/${code}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

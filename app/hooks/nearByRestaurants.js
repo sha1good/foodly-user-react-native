@@ -10,7 +10,7 @@ const fetchNearByRestaurants = (code) => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`http://localhost:6002/api/restaurant/${code}`);
+            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/restaurant/${code}`);
 
             setRestaurants(response.data)
             console.log(restaurants);

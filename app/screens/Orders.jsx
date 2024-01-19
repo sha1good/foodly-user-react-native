@@ -44,7 +44,7 @@ const Orders = () => {
     const accessToken = JSON.parse(token);
     try {
       const response = await axios.post(
-        "http://localhost:6002/api/orders",
+        "https://foodlybackend-react-production.up.railway.app/api/orders",
         orderObject,
         {
           headers: {

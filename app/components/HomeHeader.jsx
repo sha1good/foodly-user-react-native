@@ -42,7 +42,7 @@ const HomeHeader = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:6002/api/address/default`,
+        `https://foodlybackend-react-production.up.railway.app/api/address/default`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

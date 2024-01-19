@@ -34,7 +34,7 @@ const Cart = () => {
     const token = await AsyncStorage.getItem('token')
     const accessToken = JSON.parse(token)
     try {
-        const response = await axios.delete(`http://localhost:6002/api/cart/delete/${id}`, 
+        const response = await axios.delete(`https://foodlybackend-react-production.up.railway.app/api/cart/delete/${id}`, 
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

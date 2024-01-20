@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import { COLORS, SIZES } from "../../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../../constants/theme";
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -83,7 +83,7 @@ const FoodPage = ({ navigation, route }) => {
     const accessToken = JSON.parse(token);
     try {
       const response = await axios.post(
-        "BaseUrl/api/cart",
+        `${BaseUrl}/api/cart`,
         product,
         {
           headers: {
@@ -112,7 +112,7 @@ const FoodPage = ({ navigation, route }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `BaseUrl/api/restaurant/byId/${id}`
+        `${BaseUrl}/api/restaurant/byId/${id}`
       );
 
       setRestaurant(response.data);

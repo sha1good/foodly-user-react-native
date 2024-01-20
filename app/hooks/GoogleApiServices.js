@@ -1,12 +1,13 @@
 import axios from "axios"
+import { GoogleApiKey } from "../constants/theme";
 
 
 const calculateDistanceAndTime = async (startLat, startLng, destinationLat, destinationLng, mode = 'bicycling') => {
-    const apiKey = "AIzaSyAYgK10l_C_HG-pSeVBVUxChyGSm6wa78Q"; // Replace with your API Key
+   
     const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
     const ratePerKm = 1; 
 
-    const requestUrl = `${baseUrl}origins=${startLat},${startLng}&destinations=${destinationLat},${destinationLng}&mode=${mode}&key=${apiKey}`;
+    const requestUrl = `${baseUrl}origins=${startLat},${startLng}&destinations=${destinationLat},${destinationLng}&mode=${mode}&key=${GoogleApiKey}`;
 
     try {
         const response = await fetch(requestUrl);

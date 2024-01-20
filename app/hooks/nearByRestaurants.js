@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BaseUrl } from "../constants/theme";
 
 const fetchNearByRestaurants = (code) => {
     const [restaurants, setRestaurants] = useState([]);
@@ -10,7 +11,7 @@ const fetchNearByRestaurants = (code) => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/restaurant/${code}`);
+            const response = await axios.get(`${BaseUrl}/api/restaurant/${code}`);
 
             setRestaurants(response.data)
             console.log(restaurants);

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import AssetImage from "../components/AssetImage";
-import { COLORS, SIZES } from "../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../constants/theme";
 import { UserReversedGeoCode } from "../context/UserReversedGeoCode";
 import { UserLocationContext } from "../context/UserLocationContext";
 import * as Location from "expo-location";
@@ -42,7 +42,7 @@ const HomeHeader = () => {
 
     try {
       const response = await axios.get(
-        `https://foodlybackend-react-production.up.railway.app/api/address/default`,
+        `${BaseUrl}/api/address/default`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

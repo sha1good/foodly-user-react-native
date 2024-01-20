@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BaseUrl } from "../constants/theme";
 
 const fetchCart = () => {
     const [cartList, setCart] = useState(null);
@@ -14,7 +15,7 @@ const fetchCart = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/cart/653168e9f94c6496dc84f3bf`,
+            const response = await axios.get(`${BaseUrl}/api/cart/653168e9f94c6496dc84f3bf`,
             {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { BaseUrl } from "../constants/theme";
 
 const fetchFoodRecommendations = (code) => {
     const [recommendations, setRecommendations] = useState(null);
@@ -10,7 +11,7 @@ const fetchFoodRecommendations = (code) => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/foods/recommendation/${code}`);
+            const response = await axios.get(`${BaseUrl}/api/foods/recommendation/${code}`);
 
             setRecommendations(response.data)
 s

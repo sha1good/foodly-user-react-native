@@ -12,7 +12,7 @@ import { Button, BackBtn } from "../components";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { COLORS, SIZES } from "../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../constants/theme";
 import styles from "./login.style";
 import LottieView from "lottie-react-native";
 import axios from "axios";
@@ -54,7 +54,7 @@ const LoginPage = ({ navigation }) => {
     setLoader(true);
 
     try {
-      const endpoint = "https://foodlybackend-react-production.up.railway.app/login";
+      const endpoint = `${BaseUrl}/login`;
       const data = values;
 
       const response = await axios.post(endpoint, data);

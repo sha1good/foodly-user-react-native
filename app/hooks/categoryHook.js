@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BaseUrl } from "../constants/theme";
 
 const fetchCategories = () => {
     const [categories, setCategories] = useState(null);
@@ -11,7 +12,7 @@ const fetchCategories = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/category/random`);
+            const response = await axios.get(`${BaseUrl}/api/category/random`);
 
             setCategories(response.data)
             

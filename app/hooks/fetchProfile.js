@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BaseUrl } from "../constants/theme";
 
 const fetchProfile = () => {
     const [user, setProfile] = useState(null);
@@ -14,7 +15,7 @@ const fetchProfile = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/users`,
+            const response = await axios.get(`${BaseUrl}/api/users`,
             {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,

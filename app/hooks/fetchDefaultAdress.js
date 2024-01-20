@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BaseUrl } from "../constants/theme";
 
 const fetchDefaultAddress = () => {
     const [defaultAddress, setAddress] = useState(null);
@@ -14,7 +15,7 @@ const fetchDefaultAddress = () => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/address/default`,
+            const response = await axios.get(`${BaseUrl}/api/address/default`,
             {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,

@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import fetchCategortItems from "../hooks/fetchByCat";
 import axios from "axios";
 import HomeCategory from "../components/HomeCategory";
-import { COLORS, SIZES } from "../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../constants/theme";
 import fetchCartCount from "../hooks/cartCount";
 
 const Home = ({navigation}) => {
@@ -30,7 +30,7 @@ const Home = ({navigation}) => {
 
     try {
       const response = await axios.get(
-        `https://foodlybackend-react-production.up.railway.app/api/foods/${selectedCategory}/41007428`
+        `${BaseUrl}/api/foods/${selectedCategory}/41007428`
       );
 
       setCategory(response.data);

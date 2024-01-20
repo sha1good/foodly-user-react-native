@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { OtpInput } from "react-native-otp-entry";
-import { COLORS } from "../constants/theme";
+import { BaseUrl, COLORS } from "../constants/theme";
 import { BackBtn } from "../components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,7 +35,7 @@ const VerificationPage = ({ navigation }) => {
       console.log(accessToken);
 
       const response = await axios.get(
-        `https://foodlybackend-react-production.up.railway.app/api/users/verify/${code}`,
+        `${BaseUrl}/api/users/verify/${code}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

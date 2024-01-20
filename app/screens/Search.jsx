@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, SIZES } from "../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../constants/theme";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import styles from "./search.style";
 import { RatingInput, Rating } from "react-native-stock-star-rating";
@@ -27,7 +27,7 @@ const Search = ({navigation}) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://foodlybackend-react-production.up.railway.app/api/foods/search/${searchKey}`
+        `${BaseUrl}/api/foods/search/${searchKey}`
       );
       setSearchResults(response.data);
     } catch (error) {

@@ -54,7 +54,12 @@ const SHADOWS = {
     shadowRadius: 5.84,
     elevation: 5,
   },
+
 };
 
+const BaseUrl = 'https://foodlybackend-react-production.up.railway.app';
+const GoogleApiKey = "AIzaSyAxBpSy7vvZYMubU_FiEIsw0P9UaSBHfdM"
 
-export { COLORS, SIZES , SHADOWS };
+
+
+export { COLORS, SIZES , SHADOWS, BaseUrl, GoogleApiKey };

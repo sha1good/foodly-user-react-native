@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { BaseUrl } from "../constants/theme";
 const fetchCategortItems = (category, code) => {
     const [categoryItems, setCategoryItems] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -8,7 +8,7 @@ const fetchCategortItems = (category, code) => {
         setIsLoading(true)
 
         try {
-            const response = await axios.get(`https://foodlybackend-react-production.up.railway.app/api/restaurant/byId/${id}`);
+            const response = await axios.get(`${BaseUrl}/api/restaurant/byId/${id}`);
 
             setCategoryItems(response.data)
 

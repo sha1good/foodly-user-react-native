@@ -13,7 +13,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import MapView, { Callout, Circle, Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import PagerView from "react-native-pager-view";
-import { COLORS } from "../../constants/theme";
+import { BaseUrl, COLORS, GoogleApiKey } from "../../constants/theme";
 import { Button } from "../../components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -77,7 +77,7 @@ const AddAddresses = ({ navigation }) => {
 
     try {
       const response = await axios.post(
-        `https://foodlybackend-react-production.up.railway.app/api/address`,
+        `${BaseUrl}/api/address`,
         data, 
         {
           headers: {
@@ -137,7 +137,7 @@ const AddAddresses = ({ navigation }) => {
               }
             }}
             query={{
-              key: "AIzaSyAxBpSy7vvZYMubU_FiEIsw0P9UaSBHfdM",
+              key: GoogleApiKey,
               language: "en",
               location: `${region.latitude}, ${region.longitude}`,
             }}

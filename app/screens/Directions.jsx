@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker, Polyline } from '@react-native-maps/mapview';
 import Geolocation from '@react-native-community/geolocation';
+import { GoogleApiKey } from '../constants/theme';
 
 const AppMap = () => {
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -28,7 +29,7 @@ const AppMap = () => {
 
   const fetchDirections = async (startLat, startLng, destinationLat, destinationLng) => {
     try {
-      const response = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLat},${startLng}&destination=${destinationLat},${destinationLng}&key=YOUR_GOOGLE_API_KEY`);
+      const response = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLat},${startLng}&destination=${destinationLat},${destinationLng}&key=${GoogleApiKey}`);
       const data = await response.json();
       const points = data.routes[0].legs[0].steps.map(step => step.polyline.points);
       const result = [].concat(...points).map(point => decode(point));

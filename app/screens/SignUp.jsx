@@ -14,7 +14,7 @@ import LottieView from "lottie-react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import { COLORS, SIZES } from "../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../constants/theme";
 import { BackBtn, Button } from "../components";
 import { UserLocationContext } from "../context/UserLocationContext";
 import axios from "axios";
@@ -57,7 +57,7 @@ const SignUp = ({ navigation }) => {
     setLoader(true);
 
     try {
-      const endpoint = "https://foodlybackend-react-production.up.railway.app/register";
+      const endpoint = `${BaseUrl}/register`;
       const data = values;
 
       const response = await axios.post(endpoint, data);

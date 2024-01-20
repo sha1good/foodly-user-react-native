@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReusableHeader from "../components/ReusableHeader";
 import fetchDefaultAddress from "../hooks/fetchDefaultAdress";
 import CookLoader from "../components/CookLoader";
-import { COLORS, SIZES } from "../constants/theme";
+import { BaseUrl, COLORS, SIZES } from "../constants/theme";
 import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -44,7 +44,7 @@ const Orders = () => {
     const accessToken = JSON.parse(token);
     try {
       const response = await axios.post(
-        "https://foodlybackend-react-production.up.railway.app/api/orders",
+        `${BaseUrl}/api/orders`,
         orderObject,
         {
           headers: {

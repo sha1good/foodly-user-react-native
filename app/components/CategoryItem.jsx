@@ -4,6 +4,7 @@ import { COLORS, SHADOWS } from '../constants/theme';
 
 
 const CategoryItem = ({category, selected}) => {
+  print(category.imageUrl);
   return (
     <View
       style={{
@@ -11,7 +12,7 @@ const CategoryItem = ({category, selected}) => {
         padding: 5,
         alignItems: "center",
         margin: 5,
-        width: 80,
+        width: 90,
         height: 55,
         justifyContent: "center",
         borderRadius: 15,

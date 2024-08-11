@@ -34,7 +34,7 @@ const Profile = ({navigation}) => {
         <View
           style={{
             backgroundColor: COLORS.offwhite,
-            height: SIZES.height - 80,
+            height: SIZES.height - 56,
             borderBottomEndRadius: 30,
             borderBottomStartRadius: 30,
           }}
@@ -95,7 +95,7 @@ const Profile = ({navigation}) => {
             <ProfileTile title={"Places"} icon={"heart"} font={2} onPress={()=> {navigation.navigate('verification_page')}}/>
             <ProfileTile title={"Payment History"} icon={"creditcard"} onPress={()=> {navigation.navigate('otp-screen')}}/>
           </View>
-
+ {/*
           <View
             style={{
               height: 140,
@@ -104,11 +104,12 @@ const Profile = ({navigation}) => {
               borderRadius: 12,
             }}
           >
+           
             <ProfileTile title={"Coupons"} icon={"tago"} />
             <ProfileTile title={"My Store"} icon={"bag"} font={2} />
-            <ProfileTile title={"History"} icon={"globe-outline"} font={1} />
+          <ProfileTile title={"History"} icon={"globe-outline"} font={1} /> 
           </View>
-
+*/}
           <RegistrationTile
             heading={"Join the courier team"}
             desc={

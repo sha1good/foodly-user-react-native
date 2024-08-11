@@ -57,7 +57,7 @@ const SHADOWS = {
 
 };
 
-const BaseUrl = 'https://foodlybackend-react-production.up.railway.app';
+const BaseUrl = 'http://10.0.2.2:6003';
 const GoogleApiKey = "AIzaSyAxBpSy7vvZYMubU_FiEIsw0P9UaSBHfdM"
 
 

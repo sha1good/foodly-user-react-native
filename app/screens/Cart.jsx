@@ -58,7 +58,7 @@ useEffect(() => {
 
     <SafeAreaView>
       <View style={{backgroundColor: COLORS.primary, height: SIZES.height}}>
-      <View style={{backgroundColor: COLORS.offwhite, height: SIZES.height-140, borderBottomEndRadius: 30, borderBottomStartRadius: 30}}>
+      <View style={{backgroundColor: COLORS.offwhite, height: SIZES.height-80, borderBottomEndRadius: 30, borderBottomStartRadius: 30}}>
 
       <ReusableHeader title={"Cart"} backbtn={false}/>
       

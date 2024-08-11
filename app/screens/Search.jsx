@@ -81,7 +81,7 @@ const Search = ({navigation}) => {
         <View
           style={{
             backgroundColor: COLORS.offwhite,
-            height: SIZES.height - 140,
+            height: SIZES.height - 80,
             borderBottomEndRadius: 30,
             borderBottomStartRadius: 30,
           }}
